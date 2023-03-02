@@ -1,0 +1,31 @@
+on:
+  workflow_dispatch:
+    inputs:
+      source_code:
+          description: 'Source code URL'     
+          required: true
+      commit_hash:
+          description: 'Commit Hash'     
+          required: true
+
+jobs:
+  setpackage:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: build ipk
+      id: build
+      env:
+        SOURCECODEURL: ${{ github.event.inputs.source_code }}
+        COMMITHASH: ${{ github.event.inputs.commit_hash }}
+      run: |
+        cd $GITHUB_WORKSPACE
+        chmod +x ./build_otbr.sh
+        ./build_otbr.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: openthread_br_related_ipks
+        path: |
+          ./*ipk*
