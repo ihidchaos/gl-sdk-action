@@ -6,7 +6,7 @@ on:
           required: true
       commit_hash:
           description: 'Commit Hash'     
-          required: true
+          required: false
       device:
         description: 'Select device'     
         required: true
