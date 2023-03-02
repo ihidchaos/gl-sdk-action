@@ -11,6 +11,7 @@ sudo -E apt-get install git  asciidoc bash bc binutils bzip2 fastjar flex gawk g
 mkdir -p  ${WORKDIR}/buildsource
 cd  ${WORKDIR}/buildsource
 git clone "$SOURCECODEURL"
+[ -n "${COMMITHASH}" ] && cd ${SOURCECODEURL} && git checkout ${COMMITHASH}
 cd  ${WORKDIR}
 
 
