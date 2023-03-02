@@ -7,6 +7,17 @@ on:
       commit_hash:
           description: 'Commit Hash'     
           required: true
+      device:
+        description: 'Select device'     
+        required: true
+        type: choice
+        options:
+        - AX1800
+        - AXT1800
+        - MT2500
+        - MT3000
+        - SF1200
+        - SFT1200
 
 jobs:
   setpackage:
@@ -20,6 +31,7 @@ jobs:
       env:
         SOURCECODEURL: ${{ github.event.inputs.source_code }}
         COMMITHASH: ${{ github.event.inputs.commit_hash }}
+        BOARD: ${{ github.event.inputs.device }}
       run: |
         cd $GITHUB_WORKSPACE
         chmod +x ./build_otbr.sh
