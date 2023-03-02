@@ -56,7 +56,7 @@ esac
 
 cd openwrt-sdk
 sed -i "1i\src-link githubaction ${WORKDIR}/buildsource" feeds.conf.default
-echo src-link openthread "$($SOURCECODEURL)/etc/openwrt" >> feeds.conf.default
+echo src-link openthread "${SOURCECODEURL}/etc/openwrt" >> feeds.conf.default
 
 ls -l
 cat feeds.conf.default
