@@ -36,7 +36,7 @@ jobs:
         cd $GITHUB_WORKSPACE
         chmod +x ./build_otbr.sh
         ./build_otbr.sh
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@master
       with:
         name: openthread_br_related_ipks
         path: |
