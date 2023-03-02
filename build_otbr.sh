@@ -10,8 +10,8 @@ sudo -E apt-get install git  asciidoc bash bc binutils bzip2 fastjar flex gawk g
 
 mkdir -p  ${WORKDIR}/buildsource
 cd  ${WORKDIR}/buildsource
-git clone "$SOURCECODEURL"
-[ -n "${COMMITHASH}" ] && cd ${SOURCECODEURL} && git checkout ${COMMITHASH}
+git clone "$SOURCECODEURL" ot-br-posix
+[ -n "${COMMITHASH}" ] && cd ot-br-posix && git checkout ${COMMITHASH}
 cd  ${WORKDIR}
 
 
@@ -57,7 +57,7 @@ esac
 
 cd openwrt-sdk
 sed -i "1i\src-link githubaction ${WORKDIR}/buildsource" feeds.conf.default
-echo src-link openthread "${SOURCECODEURL}/etc/openwrt" >> feeds.conf.default
+echo src-link openthread "${WORKDIR}/buildsource/ot-br-posix/etc/openwrt" >> feeds.conf.default
 
 ls -l
 cat feeds.conf.default
