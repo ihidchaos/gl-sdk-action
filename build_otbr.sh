@@ -12,6 +12,7 @@ mkdir -p  ${WORKDIR}/buildsource
 cd  ${WORKDIR}/buildsource
 git clone "$SOURCECODEURL" ot-br-posix
 [ -n "${COMMITHASH}" ] && cd ot-br-posix && git checkout ${COMMITHASH}
+git submodule update --init --recursive
 cd  ${WORKDIR}
 
 
