@@ -56,17 +56,16 @@ case "$BOARD" in
 esac
 
 cd openwrt-sdk
-sed -i "1i\src-link githubaction ${WORKDIR}/buildsource" feeds.conf.default
 echo src-link openthread "${WORKDIR}/buildsource/ot-br-posix/etc/openwrt" >> feeds.conf.default
 
 ls -l
 cat feeds.conf.default
 
-./scripts/feeds update -a
-./scripts/feeds install -a
-echo CONFIG_ALL=y >.config
+./scripts/feeds update openthread
+./scripts/feeds install openthread-br
+
 make defconfig
-make V=s ./package/feeds/githubaction/openthread-br/compile
+make -j1 V=sc package/openthread-br/compile
 
 find bin -type f -exec ls -lh {} \;
 find bin -type f -name "*.ipk" -exec cp -f {} "${WORKDIR}" \; 
