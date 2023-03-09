@@ -8,11 +8,13 @@ WORKDIR="$(pwd)"
 sudo -E apt-get update
 sudo -E apt-get install git libsystemd-dev asciidoc bash bc binutils bzip2 fastjar flex gawk gcc genisoimage gettext git intltool jikespg libgtk2.0-dev libncurses5-dev libssl-dev make mercurial patch perl-modules python2.7-dev rsync ruby sdcc subversion unzip util-linux wget xsltproc zlib1g-dev zlib1g-dev -y
 
-mkdir -p  ${WORKDIR}/buildsource
-cd  ${WORKDIR}/buildsource
+mkdir -p  ${WORKDIR}/buildsource && cd  ${WORKDIR}/buildsource
+
 git clone "$SOURCECODEURL" ot-br-posix
-[ -n "${COMMITHASH}" ] && cd ot-br-posix && git checkout ${COMMITHASH}
+cd ot-br-posix
+[ -n "${COMMITHASH}" ] && git checkout ${COMMITHASH}
 git submodule update --init --recursive
+
 cd  ${WORKDIR}
 
 
@@ -62,8 +64,8 @@ echo src-link openthread "${WORKDIR}/buildsource/ot-br-posix/etc/openwrt" >> fee
 ls -l
 cat feeds.conf.default
 
-./scripts/feeds update openthread
-./scripts/feeds install openthread-br
+./scripts/feeds update -a
+./scripts/feeds install -a
 
 make defconfig
 make -j1 V=sc package/openthread-br/compile
